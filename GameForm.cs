@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MiniProject.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -46,36 +47,24 @@ namespace MiniProject
                 switch (nextLocation)
                 {
                     case 1:
-                        //remove timer picture from pallet1
+                        picPending1.Visible = false; //removes pending icon
                         btnPallet1.Enabled = true;
                         if (pallet1.status == Status.empty)
                         {
                             pallet1.status = Status.emptybase;
-                            //change picture to empty base
+                            btnPallet1.Image = Properties.Resources.empty_base;//changes picture
                             break;
                         }
-                        if(pallet1.status == Status.small)
+                        if(pallet1.status == Status.small || pallet1.status == Status.bustedSmall)
                         {
                             pallet1.status = Status.smallWrapped;
-                            //change picture to smalled wrapped
+                            btnPallet1.Image = Properties.Resources.small_wrapped;
                             break;
                         }
-                        if(pallet1.status == Status.tall)
+                        if(pallet1.status == Status.tall || pallet1.status == Status.bustedTall)
                         {
                             pallet1.status = Status.closed;
-                            //change picture to closed
-                            break;
-                        }
-                        if(pallet1.status == Status.bustedSmall)
-                        {
-                            pallet1.status = Status.smallWrapped;
-                            //change picture to small wrapped
-                            break;
-                        }
-                        if(pallet1.status == Status.bustedTall)
-                        {
-                            pallet1.status = Status.closed;
-                            //change picture to closed
+                            btnPallet1.Image = Properties.Resources.closed;
                             break;
                         }
                         if(pallet1.status == Status.closed)
@@ -83,54 +72,212 @@ namespace MiniProject
                             if (staging1.status == Status.empty)
                             {
                                 pallet1.status = Status.empty;
+                                btnPallet1.Image = null;
                                 pallet1.stuck = true;
                                 staging1.status = Status.needswrap;
+                                btnStaging1.Image = Properties.Resources.closed;
                                 break;
                             }
                             else if (staging2.status == Status.empty)
                             {
                                 pallet1.status = Status.empty;
+                                btnPallet1.Image = null;
                                 pallet1.stuck = true;
                                 staging2.status = Status.needswrap;
+                                btnStaging2.Image = Properties.Resources.closed;
                                 break;
                             }
                             else
                             {
                                 //print message saying there's no empty slots
+                                lives--;
                                 break;
                             }
                         }
                         break;
                     case 2:
+                        picPending2.Visible = false;
+                        btnPallet2.Enabled = true;
+                        if (pallet2.status == Status.empty)
+                        {
+                            pallet2.status = Status.emptybase;
+                            btnPallet2.Image = Properties.Resources.empty_base;
+                            break;
+                        }
+                        if (pallet2.status == Status.small || pallet2.status == Status.bustedSmall)
+                        {
+                            pallet2.status = Status.smallWrapped;
+                            btnPallet2.Image = Properties.Resources.small_wrapped;
+                            break;
+                        }
+                        if (pallet2.status == Status.tall || pallet2.status == Status.bustedTall)
+                        {
+                            pallet2.status = Status.closed;
+                            btnPallet2.Image = Properties.Resources.closed;
+                            break;
+                        }
+                        if (pallet2.status == Status.closed)
+                        {
+                            if (staging1.status == Status.empty)
+                            {
+                                pallet2.status = Status.empty;
+                                btnPallet2.Image = null;
+                                pallet2.stuck = true;
+                                staging1.status = Status.needswrap;
+                                btnStaging1.Image = Properties.Resources.closed;
+                                break;
+                            }
+                            else if (staging2.status == Status.empty)
+                            {
+                                pallet2.status = Status.empty;
+                                btnPallet2.Image = null;
+                                pallet2.stuck = true;
+                                staging2.status = Status.needswrap;
+                                btnStaging2.Image = Properties.Resources.closed;
+                                break;
+                            }
+                            else
+                            {
+                                //print message saying there's no empty slots
+                                lives--;
+                                break;
+                            }
+                        }
                         break;
                     case 3:
+                        picPending3.Visible = false;
+                        btnPallet3.Enabled = true;
+                        if (pallet3.status == Status.empty)
+                        {
+                            pallet3.status = Status.emptybase;
+                            btnPallet3.Image = Properties.Resources.empty_base;
+                            break;
+                        }
+                        if (pallet3.status == Status.small || pallet3.status == Status.bustedSmall)
+                        {
+                            pallet3.status = Status.smallWrapped;
+                            btnPallet3.Image = Properties.Resources.small_wrapped;
+                            break;
+                        }
+                        if (pallet3.status == Status.tall || pallet3.status == Status.bustedTall)
+                        {
+                            pallet3.status = Status.closed;
+                            btnPallet3.Image = Properties.Resources.closed;
+                            break;
+                        }
+                        if (pallet3.status == Status.closed)
+                        {
+                            if (staging1.status == Status.empty)
+                            {
+                                pallet3.status = Status.empty;
+                                btnPallet3.Image = null;
+                                pallet3.stuck = true;
+                                staging1.status = Status.needswrap;
+                                btnStaging1.Image = Properties.Resources.closed;
+                                break;
+                            }
+                            else if (staging2.status == Status.empty)
+                            {
+                                pallet3.status = Status.empty;
+                                btnPallet3.Image = null;
+                                pallet3.stuck = true;
+                                staging2.status = Status.needswrap;
+                                btnStaging2.Image = Properties.Resources.closed;
+                                break;
+                            }
+                            else
+                            {
+                                //print message saying there's no empty slots
+                                lives--;
+                                break;
+                            }
+                        }
                         break;
                     case 4:
+                        picPending4.Visible = false;
+                        btnPallet4.Enabled = true;
+                        if (pallet4.status == Status.empty)
+                        {
+                            pallet4.status = Status.emptybase;
+                            btnPallet4.Image = Properties.Resources.empty_base;
+                            break;
+                        }
+                        if (pallet4.status == Status.small || pallet4.status == Status.bustedSmall)
+                        {
+                            pallet4.status = Status.smallWrapped;
+                            btnPallet4.Image = Properties.Resources.small_wrapped;
+                            break;
+                        }
+                        if (pallet4.status == Status.tall || pallet4.status == Status.bustedTall)
+                        {
+                            pallet4.status = Status.closed;
+                            btnPallet4.Image = Properties.Resources.closed;
+                            break;
+                        }
+                        if (pallet4.status == Status.closed)
+                        {
+                            if (staging1.status == Status.empty)
+                            {
+                                pallet4.status = Status.empty;
+                                btnPallet4.Image = null;
+                                pallet4.stuck = true;
+                                staging1.status = Status.needswrap;
+                                btnStaging1.Image = Properties.Resources.closed;
+                                break;
+                            }
+                            else if (staging2.status == Status.empty)
+                            {
+                                pallet4.status = Status.empty;
+                                btnPallet4.Image = null;
+                                pallet4.stuck = true;
+                                staging2.status = Status.needswrap;
+                                btnStaging2.Image = Properties.Resources.closed;
+                                break;
+                            }
+                            else
+                            {
+                                //print message saying there's no empty slots and you lost a life
+                                lives--;
+                                lblLives.Text = lives.ToString();
+                                break;
+                            }
+                        }
                         break;
                     case 11:
-                        if(staging1.status == Status.needswrap)
+                        picPending11.Visible = false;
+                        btnStaging1.Enabled = true;
+                        if (staging1.status == Status.readytomove)
                         {
-                            
+                            staging1.status = Status.empty;
+                            btnStaging1.Image = null;
+                            score++; //increases score
+                            lblScore.Text = score.ToString();
                         }
-                        if(staging1.status == Status.readytomove)
+                        if (staging1.status == Status.needswrap)
                         {
-
+                            staging1.status = Status.readytomove;
+                            btnStaging1.Image = Properties.Resources.topped_and_wrapped;
                         }
                         break;
                     case 12:
-                        if (staging2.status == Status.needswrap)
-                        {
-                            
-                        }
+                        picPending12.Visible = false;
+                        btnStaging2.Enabled = true;
                         if (staging2.status == Status.readytomove)
                         {
-
+                            staging2.status = Status.empty;
+                            btnStaging2.Image = null;
+                            score++; //increases score
+                            lblScore.Text = score.ToString();
+                        }
+                        if (staging2.status == Status.needswrap)
+                        {
+                            staging2.status= Status.readytomove;
+                            btnStaging2.Image = Properties.Resources.topped_and_wrapped;
                         }
                         break;
                 }
-
+                pallets.Dequeue();
             }
-            pallets.Dequeue();
             
             if (!pallet1.stuck || !pallet2.stuck || !pallet3.stuck || !pallet4.stuck) //not sure what this was originally for
             {
@@ -139,13 +286,95 @@ namespace MiniProject
             }
             
         }
+        private void AddBoxes()
+        {
+            //if any pallets slots are empty base, small wrapped, or medium
+            //add packages to them
+            if(pallet1.status == Status.medium || pallet1.status == Status.smallWrapped || pallet1.status == Status.emptybase)
+            {   //or if pallet1 status is not stuck?? might rewrite later
+                if (pallet1.status == Status.medium)
+                {
+                    pallet1.status = Status.tall;
+                    btnPallet1.Image = Properties.Resources.tall;
+                }
+                else if (pallet1.status == Status.smallWrapped)
+                {
+                    pallet1.status = Status.medium;
+                    btnPallet1.Image = Properties.Resources.medium;
+                }
+                else
+                {
+                    pallet1.status = Status.small;
+                    btnPallet1.Image = Properties.Resources.small;
+                }
+            }
+            if(pallet2.status == Status.medium || pallet2.status == Status.smallWrapped || pallet2.status == Status.emptybase)
+            {
+                if (pallet2.status == Status.medium)
+                {
+                    pallet2.status = Status.tall;
+                    btnPallet2.Image = Properties.Resources.tall;
+                }
+                else if (pallet2.status == Status.smallWrapped)
+                {
+                    pallet2.status = Status.medium;
+                    btnPallet2.Image = Properties.Resources.medium;
+                }
+                else
+                {
+                    pallet2.status = Status.small;
+                    btnPallet2.Image = Properties.Resources.small;
+                }
+            }
+            if(pallet3.status == Status.medium || pallet3.status == Status.smallWrapped || pallet3.status == Status.emptybase)
+            {
+                if (pallet3.status == Status.medium)
+                {
+                    pallet3.status = Status.tall;
+                    btnPallet3.Image = Properties.Resources.tall;
+                }
+                else if (pallet3.status == Status.smallWrapped)
+                {
+                    pallet3.status = Status.medium;
+                    btnPallet3.Image = Properties.Resources.medium;
+                }
+                else
+                {
+                    pallet3.status = Status.small;
+                    btnPallet3.Image = Properties.Resources.small;
+                }
+            }
+            if(pallet4.status == Status.medium || pallet4.status == Status.smallWrapped || pallet4.status == Status.emptybase)
+            {
+                if (pallet4.status == Status.medium)
+                {
+                    pallet4.status = Status.tall;
+                    btnPallet4.Image = Properties.Resources.tall;
+                }
+                else if (pallet4.status == Status.smallWrapped)
+                {
+                    pallet4.status = Status.medium;
+                    btnPallet4.Image = Properties.Resources.medium;
+                }
+                else
+                {
+                    pallet4.status = Status.small;
+                    btnPallet4.Image = Properties.Resources.small;
+                }
+            }
+
+        }
+        private void BadThings()
+        {
+
+        }
         private void btnPallet1_Click(object sender, EventArgs e)
         {
             if (pallet1.status != Status.emptybase && pallet1.status != Status.smallWrapped && pallet1.status != Status.medium)
             {
                 pallets.Enqueue(pallet1);
                 btnPallet1.Enabled = false;
-                //show a little timer picture
+                picPending1.Visible = true; //shows little timer picture
             }
         }
 
@@ -155,7 +384,7 @@ namespace MiniProject
             {
                 pallets.Enqueue(pallet2);
                 btnPallet2.Enabled = false;
-                //show a little timer picture
+                picPending2.Visible = true;
             }
         }
 
@@ -165,7 +394,7 @@ namespace MiniProject
             {
                 pallets.Enqueue(pallet3);
                 btnPallet3.Enabled = false;
-                //show a little timer picture
+                picPending3.Visible = true;
             }
         }
 
@@ -175,7 +404,7 @@ namespace MiniProject
             {
                 pallets.Enqueue(pallet4);
                 btnPallet4.Enabled = false;
-                //show a little timer picture
+                picPending4.Visible = true;
             }
         }
 
@@ -185,7 +414,7 @@ namespace MiniProject
             {
                 pallets.Enqueue(staging1);
                 btnStaging1.Enabled = false;
-                //show a little timer picture
+                picPending11.Visible = true;
             }
         }
 
@@ -195,7 +424,7 @@ namespace MiniProject
             {
                 pallets.Enqueue(staging2);
                 btnStaging2.Enabled = false;
-                //show a little timer picture
+                picPending12.Visible = true;
             }
         }
 
@@ -204,6 +433,7 @@ namespace MiniProject
             if (!gameOver)
             {
                 GameLoop();
+                AddBoxes(); //put on different timer
             }
             else
             {

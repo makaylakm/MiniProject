@@ -34,6 +34,7 @@ namespace MiniProject
 
         private void btnPlay_Click(object sender, EventArgs e)
         {
+            playerName = txtboxName.Text;
             GameForm gameForm = new GameForm();
             gameForm.Show();
             this.Hide();
@@ -41,7 +42,7 @@ namespace MiniProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            playerName = txtboxName.Text;
+            
         }
     }
 }
