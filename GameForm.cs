@@ -15,17 +15,16 @@ namespace MiniProject
 {
     public partial class GameForm : Form
     {
-        Pallet pallet1 = new Pallet(true, 1, Status.empty);
-        Pallet pallet2 = new Pallet(false, 2, Status.small);
-        Pallet pallet3 = new Pallet(false, 3, Status.small);
-        Pallet pallet4 = new Pallet(false, 4, Status.emptybase);
+        Pallet pallet1 = new Pallet(1, Status.empty);
+        Pallet pallet2 = new Pallet(2, Status.medium);
+        Pallet pallet3 = new Pallet(3, Status.smallWrapped);
+        Pallet pallet4 = new Pallet(4, Status.emptybase);
 
         Pallet staging1 = new Pallet(11, Status.empty);
         Pallet staging2 = new Pallet(12, Status.empty);
 
-        bool gameOver = false;
-        int lives = 3;
         string playerName = Form1.playerName;
+        int lives = 3;
         int score = 0;
 
         Queue<Pallet> pallets = new Queue<Pallet>();
@@ -38,6 +37,7 @@ namespace MiniProject
         private void GameForm_Load(object sender, EventArgs e)
         {
             timer1.Start();
+            timerAddBoxes.Start();
         }
         private void GameLoop()
         {
@@ -73,7 +73,6 @@ namespace MiniProject
                             {
                                 pallet1.status = Status.empty;
                                 btnPallet1.Image = null;
-                                pallet1.stuck = true;
                                 staging1.status = Status.needswrap;
                                 btnStaging1.Image = Properties.Resources.closed;
                                 break;
@@ -82,7 +81,6 @@ namespace MiniProject
                             {
                                 pallet1.status = Status.empty;
                                 btnPallet1.Image = null;
-                                pallet1.stuck = true;
                                 staging2.status = Status.needswrap;
                                 btnStaging2.Image = Properties.Resources.closed;
                                 break;
@@ -122,7 +120,6 @@ namespace MiniProject
                             {
                                 pallet2.status = Status.empty;
                                 btnPallet2.Image = null;
-                                pallet2.stuck = true;
                                 staging1.status = Status.needswrap;
                                 btnStaging1.Image = Properties.Resources.closed;
                                 break;
@@ -131,7 +128,6 @@ namespace MiniProject
                             {
                                 pallet2.status = Status.empty;
                                 btnPallet2.Image = null;
-                                pallet2.stuck = true;
                                 staging2.status = Status.needswrap;
                                 btnStaging2.Image = Properties.Resources.closed;
                                 break;
@@ -171,7 +167,6 @@ namespace MiniProject
                             {
                                 pallet3.status = Status.empty;
                                 btnPallet3.Image = null;
-                                pallet3.stuck = true;
                                 staging1.status = Status.needswrap;
                                 btnStaging1.Image = Properties.Resources.closed;
                                 break;
@@ -180,7 +175,6 @@ namespace MiniProject
                             {
                                 pallet3.status = Status.empty;
                                 btnPallet3.Image = null;
-                                pallet3.stuck = true;
                                 staging2.status = Status.needswrap;
                                 btnStaging2.Image = Properties.Resources.closed;
                                 break;
@@ -220,7 +214,6 @@ namespace MiniProject
                             {
                                 pallet4.status = Status.empty;
                                 btnPallet4.Image = null;
-                                pallet4.stuck = true;
                                 staging1.status = Status.needswrap;
                                 btnStaging1.Image = Properties.Resources.closed;
                                 break;
@@ -229,7 +222,6 @@ namespace MiniProject
                             {
                                 pallet4.status = Status.empty;
                                 btnPallet4.Image = null;
-                                pallet4.stuck = true;
                                 staging2.status = Status.needswrap;
                                 btnStaging2.Image = Properties.Resources.closed;
                                 break;
@@ -238,7 +230,6 @@ namespace MiniProject
                             {
                                 //print message saying there's no empty slots and you lost a life
                                 lives--;
-                                lblLives.Text = lives.ToString();
                                 break;
                             }
                         }
@@ -276,97 +267,104 @@ namespace MiniProject
                         }
                         break;
                 }
+                lblLives.Text = lives.ToString();
+                if (lives == 0)
+                    GameOver();
                 pallets.Dequeue();
             }
-            
-            if (!pallet1.stuck || !pallet2.stuck || !pallet3.stuck || !pallet4.stuck) //not sure what this was originally for
-            {
-                Random rndPallet = new Random();
-                int palletNum = rndPallet.Next(4);
-            }
-            
         }
         private void AddBoxes()
         {
-            //if any pallets slots are empty base, small wrapped, or medium
-            //add packages to them
-            if(pallet1.status == Status.medium || pallet1.status == Status.smallWrapped || pallet1.status == Status.emptybase)
-            {   //or if pallet1 status is not stuck?? might rewrite later
-                if (pallet1.status == Status.medium)
-                {
-                    pallet1.status = Status.tall;
-                    btnPallet1.Image = Properties.Resources.tall;
-                }
-                else if (pallet1.status == Status.smallWrapped)
-                {
-                    pallet1.status = Status.medium;
-                    btnPallet1.Image = Properties.Resources.medium;
-                }
-                else
-                {
-                    pallet1.status = Status.small;
-                    btnPallet1.Image = Properties.Resources.small;
-                }
-            }
-            if(pallet2.status == Status.medium || pallet2.status == Status.smallWrapped || pallet2.status == Status.emptybase)
+            //if any pallets slots are empty base, small wrapped, or medium, add boxes to them
+            if(!pallet1.stuck || !pallet2.stuck || !pallet3.stuck || !pallet4.stuck)
             {
-                if (pallet2.status == Status.medium)
+                timerOverflow.Stop();
+                if (!pallet1.stuck)
                 {
-                    pallet2.status = Status.tall;
-                    btnPallet2.Image = Properties.Resources.tall;
+                    if (pallet1.status == Status.medium)
+                    {
+                        pallet1.status = Status.tall;
+                        btnPallet1.Image = Properties.Resources.tall;
+                        timerFall1.Start();
+                    }
+                    else if (pallet1.status == Status.smallWrapped)
+                    {
+                        pallet1.status = Status.medium;
+                        btnPallet1.Image = Properties.Resources.medium;
+                    }
+                    else
+                    {
+                        pallet1.status = Status.small;
+                        btnPallet1.Image = Properties.Resources.small;
+                        timerFall1.Start();
+                    }
                 }
-                else if (pallet2.status == Status.smallWrapped)
+                if (!pallet2.stuck)
                 {
-                    pallet2.status = Status.medium;
-                    btnPallet2.Image = Properties.Resources.medium;
+                    if (pallet2.status == Status.medium)
+                    {
+                        pallet2.status = Status.tall;
+                        btnPallet2.Image = Properties.Resources.tall;
+                        timerFall2.Start();
+                    }
+                    else if (pallet2.status == Status.smallWrapped)
+                    {
+                        pallet2.status = Status.medium;
+                        btnPallet2.Image = Properties.Resources.medium;
+                    }
+                    else
+                    {
+                        pallet2.status = Status.small;
+                        btnPallet2.Image = Properties.Resources.small;
+                        timerFall2.Start();
+                    }
                 }
-                else
+                if (!pallet3.stuck)
                 {
-                    pallet2.status = Status.small;
-                    btnPallet2.Image = Properties.Resources.small;
+                    if (pallet3.status == Status.medium)
+                    {
+                        pallet3.status = Status.tall;
+                        btnPallet3.Image = Properties.Resources.tall;
+                        timerFall3.Start();
+                    }
+                    else if (pallet3.status == Status.smallWrapped)
+                    {
+                        pallet3.status = Status.medium;
+                        btnPallet3.Image = Properties.Resources.medium;
+                    }
+                    else
+                    {
+                        pallet3.status = Status.small;
+                        btnPallet3.Image = Properties.Resources.small;
+                        timerFall3.Start();
+                    }
+                }
+                if (!pallet4.stuck)
+                {
+                    if (pallet4.status == Status.medium)
+                    {
+                        pallet4.status = Status.tall;
+                        btnPallet4.Image = Properties.Resources.tall;
+                        timerFall4.Start();
+                    }
+                    else if (pallet4.status == Status.smallWrapped)
+                    {
+                        pallet4.status = Status.medium;
+                        btnPallet4.Image = Properties.Resources.medium;
+                    }
+                    else
+                    {
+                        pallet4.status = Status.small;
+                        btnPallet4.Image = Properties.Resources.small;
+                        timerFall4.Start();
+                    }
                 }
             }
-            if(pallet3.status == Status.medium || pallet3.status == Status.smallWrapped || pallet3.status == Status.emptybase)
+            //if there's nowhere to add boxes/all pallets stuck for too long
+            else if(!timerOverflow.Enabled) //start timer for overflow if it isn't started already
             {
-                if (pallet3.status == Status.medium)
-                {
-                    pallet3.status = Status.tall;
-                    btnPallet3.Image = Properties.Resources.tall;
-                }
-                else if (pallet3.status == Status.smallWrapped)
-                {
-                    pallet3.status = Status.medium;
-                    btnPallet3.Image = Properties.Resources.medium;
-                }
-                else
-                {
-                    pallet3.status = Status.small;
-                    btnPallet3.Image = Properties.Resources.small;
-                }
+                timerOverflow.Start();
             }
-            if(pallet4.status == Status.medium || pallet4.status == Status.smallWrapped || pallet4.status == Status.emptybase)
-            {
-                if (pallet4.status == Status.medium)
-                {
-                    pallet4.status = Status.tall;
-                    btnPallet4.Image = Properties.Resources.tall;
-                }
-                else if (pallet4.status == Status.smallWrapped)
-                {
-                    pallet4.status = Status.medium;
-                    btnPallet4.Image = Properties.Resources.medium;
-                }
-                else
-                {
-                    pallet4.status = Status.small;
-                    btnPallet4.Image = Properties.Resources.small;
-                }
-            }
-
-        }
-        private void BadThings()
-        {
-
         }
         private void btnPallet1_Click(object sender, EventArgs e)
         {
@@ -375,6 +373,10 @@ namespace MiniProject
                 pallets.Enqueue(pallet1);
                 btnPallet1.Enabled = false;
                 picPending1.Visible = true; //shows little timer picture
+                if (pallet1.status == Status.small || pallet1.status == Status.tall)
+                {
+                    timerFall1.Stop(); //stop fall1 timer
+                }
             }
         }
 
@@ -385,6 +387,10 @@ namespace MiniProject
                 pallets.Enqueue(pallet2);
                 btnPallet2.Enabled = false;
                 picPending2.Visible = true;
+                if (pallet2.status == Status.small || pallet2.status == Status.tall)
+                {
+                    timerFall2.Stop();
+                }
             }
         }
 
@@ -395,6 +401,10 @@ namespace MiniProject
                 pallets.Enqueue(pallet3);
                 btnPallet3.Enabled = false;
                 picPending3.Visible = true;
+                if (pallet3.status == Status.small || pallet3.status == Status.tall)
+                {
+                    timerFall3.Stop(); 
+                }
             }
         }
 
@@ -405,6 +415,10 @@ namespace MiniProject
                 pallets.Enqueue(pallet4);
                 btnPallet4.Enabled = false;
                 picPending4.Visible = true;
+                if (pallet4.status == Status.small || pallet4.status == Status.tall)
+                {
+                    timerFall4.Stop();
+                }
             }
         }
 
@@ -427,18 +441,116 @@ namespace MiniProject
                 picPending12.Visible = true;
             }
         }
-
+        private void GameOver()
+        {
+            timer1.Stop();
+            MessageBox.Show("Game over.");
+            //display game over
+            //display try again button, if you click this it will refresh everything
+            //display high scores button, if you click this it will open new window with high scores
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (!gameOver)
+            GameLoop();
+        }
+
+        private void timerFall1_Tick(object sender, EventArgs e)
+        {
+            //if a pallet is tall for too long: make busted tall, lives--
+            //if a pallet is small for too long: make busted small, lives--
+            //timer for each pallet, start timer when pallet is small or tall, restart when it's been clicked, 10 seconds
+            if(pallet1.status == Status.small)
             {
-                GameLoop();
-                AddBoxes(); //put on different timer
+                pallet1.status = Status.bustedSmall;
+                btnPallet1.Image = Properties.Resources.busted;
+                lives--;
+                lblLives.Text = lives.ToString();
             }
-            else
+            else if(pallet1.status == Status.tall)
             {
-                //what happens for game over
+                pallet1.status = Status.bustedTall;
+                btnPallet1.Image = Properties.Resources.busted;
+                lives--;
+                lblLives.Text = lives.ToString();
             }
+            timerFall1.Stop();
+            if (lives == 0)
+                GameOver();
+        }
+
+        private void timerFall2_Tick(object sender, EventArgs e)
+        {
+            if (pallet2.status == Status.small)
+            {
+                pallet2.status = Status.bustedSmall;
+                btnPallet2.Image = Properties.Resources.busted;
+                lives--;
+                lblLives.Text = lives.ToString();
+            }
+            else if (pallet2.status == Status.tall)
+            {
+                pallet2.status = Status.bustedTall;
+                btnPallet2.Image = Properties.Resources.busted;
+                lives--;
+                lblLives.Text = lives.ToString();
+            }
+            timerFall2.Stop();
+            if (lives == 0)
+                GameOver();
+        }
+
+        private void timerFall3_Tick(object sender, EventArgs e)
+        {
+            if (pallet3.status == Status.small)
+            {
+                pallet3.status = Status.bustedSmall;
+                btnPallet3.Image = Properties.Resources.busted;
+                lives--;
+                lblLives.Text = lives.ToString();
+            }
+            else if (pallet3.status == Status.tall)
+            {
+                pallet3.status = Status.bustedTall;
+                btnPallet3.Image = Properties.Resources.busted;
+                lives--;
+                lblLives.Text = lives.ToString();
+            }
+            timerFall3.Stop();
+            if (lives == 0)
+                GameOver();
+        }
+
+        private void timerFall4_Tick(object sender, EventArgs e)
+        {
+            if (pallet4.status == Status.small)
+            {
+                pallet4.status = Status.bustedSmall;
+                btnPallet4.Image = Properties.Resources.busted;
+                lives--;
+                lblLives.Text = lives.ToString();
+            }
+            else if (pallet4.status == Status.tall)
+            {
+                pallet4.status = Status.bustedTall;
+                btnPallet4.Image = Properties.Resources.busted;
+                lives--;
+                lblLives.Text = lives.ToString();
+            }
+            timerFall4.Stop();
+            if (lives == 0)
+                GameOver();
+        }
+
+        private void timerAddBoxes_Tick(object sender, EventArgs e)
+        {
+            AddBoxes();
+        }
+
+        private void timerOverflow_Tick(object sender, EventArgs e)
+        {
+            //show picture of conveyor belt overflowing
+            //show message that belt overflowed
+            GameOver();
         }
     }
 }

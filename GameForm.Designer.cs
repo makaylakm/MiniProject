@@ -47,6 +47,12 @@
             this.lbl2 = new System.Windows.Forms.Label();
             this.lblScore = new System.Windows.Forms.Label();
             this.lblLives = new System.Windows.Forms.Label();
+            this.timerFall1 = new System.Windows.Forms.Timer(this.components);
+            this.timerFall2 = new System.Windows.Forms.Timer(this.components);
+            this.timerFall3 = new System.Windows.Forms.Timer(this.components);
+            this.timerFall4 = new System.Windows.Forms.Timer(this.components);
+            this.timerAddBoxes = new System.Windows.Forms.Timer(this.components);
+            this.timerOverflow = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picPending1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPending2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPending3)).BeginInit();
@@ -80,7 +86,7 @@
             this.btnPallet2.FlatAppearance.BorderSize = 5;
             this.btnPallet2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPallet2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPallet2.Image = global::MiniProject.Properties.Resources.small;
+            this.btnPallet2.Image = global::MiniProject.Properties.Resources.medium;
             this.btnPallet2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnPallet2.Location = new System.Drawing.Point(569, 77);
             this.btnPallet2.Name = "btnPallet2";
@@ -98,7 +104,7 @@
             this.btnPallet3.FlatAppearance.BorderSize = 5;
             this.btnPallet3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPallet3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPallet3.Image = global::MiniProject.Properties.Resources.small;
+            this.btnPallet3.Image = global::MiniProject.Properties.Resources.small_wrapped;
             this.btnPallet3.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnPallet3.Location = new System.Drawing.Point(369, 355);
             this.btnPallet3.Name = "btnPallet3";
@@ -163,7 +169,7 @@
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 10000;
+            this.timer1.Interval = 5000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // picPending1
@@ -276,6 +282,36 @@
             this.lblLives.TabIndex = 17;
             this.lblLives.Text = "3";
             // 
+            // timerFall1
+            // 
+            this.timerFall1.Interval = 10000;
+            this.timerFall1.Tick += new System.EventHandler(this.timerFall1_Tick);
+            // 
+            // timerFall2
+            // 
+            this.timerFall2.Interval = 10000;
+            this.timerFall2.Tick += new System.EventHandler(this.timerFall2_Tick);
+            // 
+            // timerFall3
+            // 
+            this.timerFall3.Interval = 10000;
+            this.timerFall3.Tick += new System.EventHandler(this.timerFall3_Tick);
+            // 
+            // timerFall4
+            // 
+            this.timerFall4.Interval = 10000;
+            this.timerFall4.Tick += new System.EventHandler(this.timerFall4_Tick);
+            // 
+            // timerAddBoxes
+            // 
+            this.timerAddBoxes.Interval = 10000;
+            this.timerAddBoxes.Tick += new System.EventHandler(this.timerAddBoxes_Tick);
+            // 
+            // timerOverflow
+            // 
+            this.timerOverflow.Interval = 20000;
+            this.timerOverflow.Tick += new System.EventHandler(this.timerOverflow_Tick);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -332,5 +368,11 @@
         private System.Windows.Forms.Label lbl2;
         private System.Windows.Forms.Label lblScore;
         private System.Windows.Forms.Label lblLives;
+        private System.Windows.Forms.Timer timerFall1;
+        private System.Windows.Forms.Timer timerFall2;
+        private System.Windows.Forms.Timer timerFall3;
+        private System.Windows.Forms.Timer timerFall4;
+        private System.Windows.Forms.Timer timerAddBoxes;
+        private System.Windows.Forms.Timer timerOverflow;
     }
 }

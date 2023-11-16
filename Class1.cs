@@ -23,15 +23,23 @@ namespace MiniProject
     }
     internal class Pallet
     {
-        public bool stuck { get; set; } //will use if all pallets are stuck, lose a life
+        public bool stuck //if all pallets are stuck for too long, lose a life
+        {
+            get
+            {
+                if (status == Status.empty || status == Status.tall || status == Status.bustedSmall || status == Status.bustedTall || status == Status.closed)
+                {
+                    return stuck = true;
+                }
+                else
+                {
+                    return stuck = false;
+                }
+            }
+            set { }
+        }
         public int location { get; set; }
         public Status status { get; set; }
-        public Pallet(bool stuck, int location, Status status)
-        {
-            this.stuck = stuck;
-            this.location = location;
-            this.status = status;
-        }
         public Pallet(int location, Status status) //for staging pallets that don't need stuck or not stuck
         {
             this.location = location;
