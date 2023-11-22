@@ -10,6 +10,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
+using System.IO;
+using System.Xml.Serialization;
 
 namespace MiniProject
 {
@@ -88,6 +90,8 @@ namespace MiniProject
                             else
                             {
                                 //print message saying there's no empty slots
+                                lblInfo.Text = "No empty staging slots. -1";
+                                lblInfo.ForeColor = Color.Red;
                                 lives--;
                                 break;
                             }
@@ -134,7 +138,8 @@ namespace MiniProject
                             }
                             else
                             {
-                                //print message saying there's no empty slots
+                                lblInfo.Text = "No empty staging slots. -1";
+                                lblInfo.ForeColor = Color.Red;
                                 lives--;
                                 break;
                             }
@@ -181,7 +186,8 @@ namespace MiniProject
                             }
                             else
                             {
-                                //print message saying there's no empty slots
+                                lblInfo.Text = "No empty staging slots. -1";
+                                lblInfo.ForeColor = Color.Red;
                                 lives--;
                                 break;
                             }
@@ -228,7 +234,8 @@ namespace MiniProject
                             }
                             else
                             {
-                                //print message saying there's no empty slots and you lost a life
+                                lblInfo.Text = "No empty staging slots. -1";
+                                lblInfo.ForeColor = Color.Red;
                                 lives--;
                                 break;
                             }
@@ -242,6 +249,8 @@ namespace MiniProject
                             staging1.status = Status.empty;
                             btnStaging1.Image = null;
                             score++; //increases score
+                            lblInfo.Text = "Completed pallet sent to truck. +1";
+                            lblInfo.ForeColor = Color.Green;
                             lblScore.Text = score.ToString();
                         }
                         if (staging1.status == Status.needswrap)
@@ -258,6 +267,8 @@ namespace MiniProject
                             staging2.status = Status.empty;
                             btnStaging2.Image = null;
                             score++; //increases score
+                            lblInfo.Text = "Completed pallet sent to truck. +1";
+                            lblInfo.ForeColor = Color.Green;
                             lblScore.Text = score.ToString();
                         }
                         if (staging2.status == Status.needswrap)
@@ -275,7 +286,7 @@ namespace MiniProject
         }
         private void AddBoxes()
         {
-            //if any pallets slots are empty base, small wrapped, or medium, add boxes to them
+            //if any pallet slots are empty base, small wrapped, or medium, add boxes to them
             if(!pallet1.stuck || !pallet2.stuck || !pallet3.stuck || !pallet4.stuck)
             {
                 timerOverflow.Stop();
@@ -375,7 +386,7 @@ namespace MiniProject
                 picPending1.Visible = true; //shows little timer picture
                 if (pallet1.status == Status.small || pallet1.status == Status.tall)
                 {
-                    timerFall1.Stop(); //stop fall1 timer
+                    timerFall1.Stop(); //stop fall1 timer, could probably delete the if statement
                 }
             }
         }
@@ -443,11 +454,42 @@ namespace MiniProject
         }
         private void GameOver()
         {
+            //stop all timers
             timer1.Stop();
-            MessageBox.Show("Game over.");
+            timerFall1.Stop();
+            timerFall2.Stop();
+            timerFall3.Stop();
+            timerFall4.Stop();
+            timerOverflow.Stop();
+            timerAddBoxes.Stop();
+
             //display game over
-            //display try again button, if you click this it will refresh everything
-            //display high scores button, if you click this it will open new window with high scores
+            MessageBox.Show("Game over.");
+
+            //display try again and high scores buttons
+            btnTryAgain.Visible = true;
+            btnHighScores.Visible = true;
+
+            //add this high score to the high scores file
+            string filepath = @"C:\Files\highscores.xml";
+            List<Player> highScores = new List<Player>();
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Player>));
+
+            //read file if it exists
+            if (File.Exists(filepath))
+            {
+                TextReader reader = new StreamReader(filepath);
+                highScores = (List<Player>)serializer.Deserialize(reader);
+                reader.Close();
+            }
+            
+            //write file
+            var player1 = new Player(playerName, this.score);
+            highScores.Add(player1);
+            TextWriter filestream = new StreamWriter(filepath);
+            serializer.Serialize(filestream, highScores);
+            filestream.Close();
+
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -464,6 +506,8 @@ namespace MiniProject
                 pallet1.status = Status.bustedSmall;
                 btnPallet1.Image = Properties.Resources.busted;
                 lives--;
+                lblInfo.Text = "Pallet 1 fell. -1";
+                lblInfo.ForeColor = Color.Red;
                 lblLives.Text = lives.ToString();
             }
             else if(pallet1.status == Status.tall)
@@ -471,6 +515,8 @@ namespace MiniProject
                 pallet1.status = Status.bustedTall;
                 btnPallet1.Image = Properties.Resources.busted;
                 lives--;
+                lblInfo.Text = "Pallet 1 fell. -1";
+                lblInfo.ForeColor = Color.Red;
                 lblLives.Text = lives.ToString();
             }
             timerFall1.Stop();
@@ -485,6 +531,8 @@ namespace MiniProject
                 pallet2.status = Status.bustedSmall;
                 btnPallet2.Image = Properties.Resources.busted;
                 lives--;
+                lblInfo.Text = "Pallet 2 fell. -1";
+                lblInfo.ForeColor = Color.Red;
                 lblLives.Text = lives.ToString();
             }
             else if (pallet2.status == Status.tall)
@@ -492,6 +540,8 @@ namespace MiniProject
                 pallet2.status = Status.bustedTall;
                 btnPallet2.Image = Properties.Resources.busted;
                 lives--;
+                lblInfo.Text = "Pallet 2 fell. -1";
+                lblInfo.ForeColor = Color.Red;
                 lblLives.Text = lives.ToString();
             }
             timerFall2.Stop();
@@ -506,6 +556,8 @@ namespace MiniProject
                 pallet3.status = Status.bustedSmall;
                 btnPallet3.Image = Properties.Resources.busted;
                 lives--;
+                lblInfo.Text = "Pallet 3 fell. -1";
+                lblInfo.ForeColor = Color.Red;
                 lblLives.Text = lives.ToString();
             }
             else if (pallet3.status == Status.tall)
@@ -513,6 +565,8 @@ namespace MiniProject
                 pallet3.status = Status.bustedTall;
                 btnPallet3.Image = Properties.Resources.busted;
                 lives--;
+                lblInfo.Text = "Pallet 3 fell. -1";
+                lblInfo.ForeColor = Color.Red;
                 lblLives.Text = lives.ToString();
             }
             timerFall3.Stop();
@@ -527,6 +581,8 @@ namespace MiniProject
                 pallet4.status = Status.bustedSmall;
                 btnPallet4.Image = Properties.Resources.busted;
                 lives--;
+                lblInfo.Text = "Pallet 4 fell. -1";
+                lblInfo.ForeColor = Color.Red;
                 lblLives.Text = lives.ToString();
             }
             else if (pallet4.status == Status.tall)
@@ -534,6 +590,8 @@ namespace MiniProject
                 pallet4.status = Status.bustedTall;
                 btnPallet4.Image = Properties.Resources.busted;
                 lives--;
+                lblInfo.Text = "Pallet 4 fell. -1";
+                lblInfo.ForeColor = Color.Red;
                 lblLives.Text = lives.ToString();
             }
             timerFall4.Stop();
@@ -548,9 +606,24 @@ namespace MiniProject
 
         private void timerOverflow_Tick(object sender, EventArgs e)
         {
-            //show picture of conveyor belt overflowing
-            //show message that belt overflowed
+            picBelt.Image = Properties.Resources.overflow2;
+            lblInfo.Text = "Conveyor belt overflowed. Game over.";
+            lblInfo.ForeColor = Color.Red;
             GameOver();
+        }
+
+        private void btnTryAgain_Click(object sender, EventArgs e)
+        {
+            //refresh everything
+            GameForm gameForm = new GameForm();
+            gameForm.Show();
+            this.Close();
+        }
+
+        private void btnHighScores_Click(object sender, EventArgs e)
+        {
+            HighScores highscoresform = new HighScores();
+            highscoresform.Show();
         }
     }
 }

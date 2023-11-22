@@ -11,7 +11,7 @@ namespace MiniProject
     {
         empty,          //stuck, can't add packages from belt
         emptybase,
-        small,
+        small,          //small
         smallWrapped,
         medium,
         tall,           //stuck
@@ -27,7 +27,7 @@ namespace MiniProject
         {
             get
             {
-                if (status == Status.empty || status == Status.tall || status == Status.bustedSmall || status == Status.bustedTall || status == Status.closed)
+                if (status == Status.empty || status == Status.small || status == Status.tall || status == Status.bustedSmall || status == Status.bustedTall || status == Status.closed)
                 {
                     return stuck = true;
                 }
@@ -44,6 +44,22 @@ namespace MiniProject
         {
             this.location = location;
             this.status = status;
+        }
+    }
+    [Serializable()]
+    public class Player : IComparable<Player>
+    {
+        public string name { get; set; }
+        public int score { get; set; }
+        public Player(string name, int score)
+        {
+            this.name = name;
+            this.score = score;
+        }
+        public Player() { }
+        public int CompareTo(Player other)
+        {
+            return other.score.CompareTo(score);
         }
     }
 }

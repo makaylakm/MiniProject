@@ -53,12 +53,17 @@
             this.timerFall4 = new System.Windows.Forms.Timer(this.components);
             this.timerAddBoxes = new System.Windows.Forms.Timer(this.components);
             this.timerOverflow = new System.Windows.Forms.Timer(this.components);
+            this.lblInfo = new System.Windows.Forms.Label();
+            this.btnTryAgain = new System.Windows.Forms.Button();
+            this.btnHighScores = new System.Windows.Forms.Button();
+            this.picBelt = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.picPending1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPending2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPending3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPending4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPending11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPending12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBelt)).BeginInit();
             this.SuspendLayout();
             // 
             // btnPallet1
@@ -67,7 +72,8 @@
             this.btnPallet1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnPallet1.FlatAppearance.BorderSize = 5;
             this.btnPallet1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPallet1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPallet1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPallet1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnPallet1.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnPallet1.Location = new System.Drawing.Point(369, 77);
             this.btnPallet1.Name = "btnPallet1";
@@ -85,7 +91,8 @@
             this.btnPallet2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnPallet2.FlatAppearance.BorderSize = 5;
             this.btnPallet2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPallet2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPallet2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPallet2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnPallet2.Image = global::MiniProject.Properties.Resources.medium;
             this.btnPallet2.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnPallet2.Location = new System.Drawing.Point(569, 77);
@@ -103,7 +110,7 @@
             this.btnPallet3.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnPallet3.FlatAppearance.BorderSize = 5;
             this.btnPallet3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPallet3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPallet3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPallet3.Image = global::MiniProject.Properties.Resources.small_wrapped;
             this.btnPallet3.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnPallet3.Location = new System.Drawing.Point(369, 355);
@@ -122,7 +129,8 @@
             this.btnPallet4.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnPallet4.FlatAppearance.BorderSize = 5;
             this.btnPallet4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPallet4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPallet4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPallet4.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnPallet4.Image = global::MiniProject.Properties.Resources.empty_base;
             this.btnPallet4.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnPallet4.Location = new System.Drawing.Point(569, 355);
@@ -140,7 +148,7 @@
             this.btnStaging1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnStaging1.FlatAppearance.BorderSize = 5;
             this.btnStaging1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStaging1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStaging1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStaging1.Location = new System.Drawing.Point(87, 77);
             this.btnStaging1.Name = "btnStaging1";
             this.btnStaging1.Size = new System.Drawing.Size(170, 255);
@@ -156,7 +164,7 @@
             this.btnStaging2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnStaging2.FlatAppearance.BorderSize = 5;
             this.btnStaging2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnStaging2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStaging2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStaging2.Location = new System.Drawing.Point(87, 355);
             this.btnStaging2.Name = "btnStaging2";
             this.btnStaging2.Size = new System.Drawing.Size(170, 255);
@@ -174,7 +182,7 @@
             // 
             // picPending1
             // 
-            this.picPending1.BackColor = System.Drawing.SystemColors.Control;
+            this.picPending1.BackColor = System.Drawing.Color.LightGray;
             this.picPending1.Image = global::MiniProject.Properties.Resources.timer_icon;
             this.picPending1.Location = new System.Drawing.Point(427, 60);
             this.picPending1.Name = "picPending1";
@@ -185,7 +193,7 @@
             // 
             // picPending2
             // 
-            this.picPending2.BackColor = System.Drawing.SystemColors.Control;
+            this.picPending2.BackColor = System.Drawing.Color.LightGray;
             this.picPending2.Image = global::MiniProject.Properties.Resources.timer_icon;
             this.picPending2.Location = new System.Drawing.Point(631, 60);
             this.picPending2.Name = "picPending2";
@@ -196,7 +204,7 @@
             // 
             // picPending3
             // 
-            this.picPending3.BackColor = System.Drawing.SystemColors.Control;
+            this.picPending3.BackColor = System.Drawing.Color.LightGray;
             this.picPending3.Image = global::MiniProject.Properties.Resources.timer_icon;
             this.picPending3.Location = new System.Drawing.Point(427, 338);
             this.picPending3.Name = "picPending3";
@@ -207,7 +215,7 @@
             // 
             // picPending4
             // 
-            this.picPending4.BackColor = System.Drawing.SystemColors.Control;
+            this.picPending4.BackColor = System.Drawing.Color.LightGray;
             this.picPending4.Image = global::MiniProject.Properties.Resources.timer_icon;
             this.picPending4.Location = new System.Drawing.Point(631, 338);
             this.picPending4.Name = "picPending4";
@@ -218,7 +226,7 @@
             // 
             // picPending11
             // 
-            this.picPending11.BackColor = System.Drawing.SystemColors.Control;
+            this.picPending11.BackColor = System.Drawing.Color.LightGray;
             this.picPending11.Image = global::MiniProject.Properties.Resources.timer_icon;
             this.picPending11.Location = new System.Drawing.Point(142, 60);
             this.picPending11.Name = "picPending11";
@@ -229,7 +237,7 @@
             // 
             // picPending12
             // 
-            this.picPending12.BackColor = System.Drawing.SystemColors.Control;
+            this.picPending12.BackColor = System.Drawing.Color.LightGray;
             this.picPending12.Image = global::MiniProject.Properties.Resources.timer_icon;
             this.picPending12.Location = new System.Drawing.Point(142, 338);
             this.picPending12.Name = "picPending12";
@@ -243,7 +251,7 @@
             this.lbl1.AutoSize = true;
             this.lbl1.BackColor = System.Drawing.Color.Transparent;
             this.lbl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl1.Location = new System.Drawing.Point(12, 9);
+            this.lbl1.Location = new System.Drawing.Point(12, -5);
             this.lbl1.Name = "lbl1";
             this.lbl1.Size = new System.Drawing.Size(93, 31);
             this.lbl1.TabIndex = 13;
@@ -254,7 +262,7 @@
             this.lbl2.AutoSize = true;
             this.lbl2.BackColor = System.Drawing.Color.Transparent;
             this.lbl2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl2.Location = new System.Drawing.Point(269, 9);
+            this.lbl2.Location = new System.Drawing.Point(12, 26);
             this.lbl2.Name = "lbl2";
             this.lbl2.Size = new System.Drawing.Size(86, 31);
             this.lbl2.TabIndex = 15;
@@ -265,7 +273,7 @@
             this.lblScore.AutoSize = true;
             this.lblScore.BackColor = System.Drawing.Color.Transparent;
             this.lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScore.Location = new System.Drawing.Point(111, 9);
+            this.lblScore.Location = new System.Drawing.Point(111, -5);
             this.lblScore.Name = "lblScore";
             this.lblScore.Size = new System.Drawing.Size(29, 31);
             this.lblScore.TabIndex = 16;
@@ -276,7 +284,7 @@
             this.lblLives.AutoSize = true;
             this.lblLives.BackColor = System.Drawing.Color.Transparent;
             this.lblLives.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLives.Location = new System.Drawing.Point(363, 9);
+            this.lblLives.Location = new System.Drawing.Point(111, 26);
             this.lblLives.Name = "lblLives";
             this.lblLives.Size = new System.Drawing.Size(29, 31);
             this.lblLives.TabIndex = 17;
@@ -309,8 +317,57 @@
             // 
             // timerOverflow
             // 
-            this.timerOverflow.Interval = 20000;
+            this.timerOverflow.Interval = 21000;
             this.timerOverflow.Tick += new System.EventHandler(this.timerOverflow_Tick);
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.AutoSize = true;
+            this.lblInfo.BackColor = System.Drawing.Color.Transparent;
+            this.lblInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfo.Location = new System.Drawing.Point(232, 9);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(346, 31);
+            this.lblInfo.TabIndex = 18;
+            this.lblInfo.Text = "Get packages to the trucks!";
+            // 
+            // btnTryAgain
+            // 
+            this.btnTryAgain.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnTryAgain.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTryAgain.Location = new System.Drawing.Point(225, 405);
+            this.btnTryAgain.Name = "btnTryAgain";
+            this.btnTryAgain.Size = new System.Drawing.Size(178, 83);
+            this.btnTryAgain.TabIndex = 19;
+            this.btnTryAgain.Text = "Try Again";
+            this.btnTryAgain.UseVisualStyleBackColor = false;
+            this.btnTryAgain.Visible = false;
+            this.btnTryAgain.Click += new System.EventHandler(this.btnTryAgain_Click);
+            // 
+            // btnHighScores
+            // 
+            this.btnHighScores.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.btnHighScores.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHighScores.Location = new System.Drawing.Point(545, 405);
+            this.btnHighScores.Name = "btnHighScores";
+            this.btnHighScores.Size = new System.Drawing.Size(187, 83);
+            this.btnHighScores.TabIndex = 20;
+            this.btnHighScores.Text = "High Scores";
+            this.btnHighScores.UseVisualStyleBackColor = false;
+            this.btnHighScores.Visible = false;
+            this.btnHighScores.Click += new System.EventHandler(this.btnHighScores_Click);
+            // 
+            // picBelt
+            // 
+            this.picBelt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picBelt.BackColor = System.Drawing.Color.Transparent;
+            this.picBelt.Image = global::MiniProject.Properties.Resources.normal_belt;
+            this.picBelt.Location = new System.Drawing.Point(882, -5);
+            this.picBelt.Name = "picBelt";
+            this.picBelt.Size = new System.Drawing.Size(138, 530);
+            this.picBelt.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picBelt.TabIndex = 21;
+            this.picBelt.TabStop = false;
             // 
             // GameForm
             // 
@@ -318,7 +375,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(968, 622);
+            this.ClientSize = new System.Drawing.Size(1032, 635);
+            this.Controls.Add(this.picBelt);
+            this.Controls.Add(this.btnHighScores);
+            this.Controls.Add(this.btnTryAgain);
+            this.Controls.Add(this.lblInfo);
             this.Controls.Add(this.lblLives);
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.lbl2);
@@ -336,7 +397,7 @@
             this.Controls.Add(this.btnPallet2);
             this.Controls.Add(this.btnPallet1);
             this.Name = "GameForm";
-            this.Text = "GameForm";
+            this.Text = "Sortation Scurry";
             this.Load += new System.EventHandler(this.GameForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picPending1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPending2)).EndInit();
@@ -344,6 +405,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picPending4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPending11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPending12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBelt)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -374,5 +436,9 @@
         private System.Windows.Forms.Timer timerFall4;
         private System.Windows.Forms.Timer timerAddBoxes;
         private System.Windows.Forms.Timer timerOverflow;
+        private System.Windows.Forms.Label lblInfo;
+        private System.Windows.Forms.Button btnTryAgain;
+        private System.Windows.Forms.Button btnHighScores;
+        private System.Windows.Forms.PictureBox picBelt;
     }
 }
